@@ -19,7 +19,7 @@ OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 mkdir -p "$OUT_DIR/DEBIAN"
 mkdir -p "$OUT_DIR/usr/local/Dronology"
 ls "$DRONOLOGY_DIR" | xargs tar -C "$DRONOLOGY_DIR" -cf - | tar -C "$OUT_DIR/usr/local/Dronology" -xf -
-ls "$SCRIPT_DIR/dronology-prototype" | xargs tar -C "$SCRIPT_DIR/dronology-prototype" -cf - | tar -C "$OUT_DIR/usr/local/Dronology" -xf -
+ls "$SCRIPT_DIR/dronology-prototype" | xargs tar -C "$SCRIPT_DIR/dronology-prototype" -cf - | tar -C "$OUT_DIR" -xf -
 
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
 Package: Dronology
@@ -38,7 +38,7 @@ cat <<EOF > "$OUT_DIR/DEBIAN/preinst"
 #!/bin/bash
 # preinst script for dronology
 
-
+apt install --yes adduser openjdk-8-jdk maven mosquitto
 
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/preinst"
@@ -71,9 +71,11 @@ setup_dronology_user() {
 setup_dronology_user
 
 chown -R dronology:dronology /usr/local/Dronology
+chown -R dronology:dronology /var/lib/dronology
 
 cd /usr/local/Dronology
-sudo -u dronology -g dronology mvn install
+export HOME=/var/lib/dronology
+sudo -u dronology -g dronology /usr/bin/mvn install
 systemctl daemon-reload
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postinst"
@@ -109,6 +111,4 @@ systemctl daemon-reload
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postrm"
 
-cd "$OUT_DIR"
-
-dpkg-deb 
+dpkg-deb --build "$OUT_DIR"
