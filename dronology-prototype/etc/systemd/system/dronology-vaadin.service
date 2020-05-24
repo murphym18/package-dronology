@@ -1,0 +1,17 @@
+[Unit]
+Description=Dronology Vaadin UI
+PartOf=dronology-omnibus.service
+After=dronology-omnibus.service
+Requires=dronology.service
+
+[Service]
+Type=simple
+User=dronology
+Group=dronology
+WorkingDirectory=/opt/Dronology/edu.nd.dronology.ui.vaadin
+EnvironmentFile=/usr/local/Dronology/dronology.env
+ExecStart=/usr/bin/mvn jetty:run
+
+[Install]
+Also=dronology.service
+Also=dronology-omnibus.service

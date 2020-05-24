@@ -1,0 +1,16 @@
+[Unit]
+Description=The pseudo-service that groups all Dronology services.
+Requires=network.target
+
+[Service]
+Type=oneshot
+User=dronology
+Group=dronology
+ExecStart=/bin/true
+RemainAfterExit=yes
+
+[Install]
+RequiredBy=dronology.service
+RequiredBy=dronology-vaadin.service
+Also=dronology.service
+Also=dronology-vaadin.service

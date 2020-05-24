@@ -1,0 +1,20 @@
+[Unit]
+Description=Dronology java backend
+PartOf=dronology-omnibus.service
+Requires=network.target
+After=dronology-omnibus.service
+Requires=mosquitto.service
+After=mosquitto.service
+
+[Service]
+Type=notify
+NotifyAccess=all
+User=dronology
+Group=dronology
+WorkingDirectory=/usr/local/Dronology/edu.nd.dronology.services.launch
+EnvironmentFile=/usr/local/Dronology/dronology.env
+ExecStart=/usr/bin/mvn exec:java
+
+[Install]
+Also=dronology-omnibus.service
+Also=dronology-vaadin.service
