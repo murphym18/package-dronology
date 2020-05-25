@@ -8,7 +8,7 @@ Requires=dronology.service
 Type=simple
 User=dronology
 Group=dronology
-WorkingDirectory=/opt/Dronology/edu.nd.dronology.ui.vaadin
+WorkingDirectory=/usr/local/Dronology/edu.nd.dronology.ui.vaadin
 EnvironmentFile=/usr/local/Dronology/dronology.env
 ExecStart=/usr/bin/mvn jetty:run
 
