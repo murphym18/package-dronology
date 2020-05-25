@@ -1,0 +1,14 @@
+[Unit]
+Description=The Dronology Ground Control Station
+PartOf=dronology-omnibus.service
+After=dronology-omnibus.service
+After=dronology.service
+Requires=dronology.service
+
+[Service]
+Type=simple
+User=dronology
+Group=dronology
+WorkingDirectory=/usr/local/Dronology-GCS
+EnvironmentFile=/usr/local/Dronology-GCS/dronology-gcs.env
+ExecStart=/usr/local/Dronology-GCS/.venv/bin/python dronology/main.py

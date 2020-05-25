@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Stops the Dronology Ground Control Station.
+
+systemctl stop gcs.service
