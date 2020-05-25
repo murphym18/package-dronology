@@ -73,7 +73,7 @@ chown -R dronology:dronology /var/lib/dronology
 
 cd /usr/local/Dronology
 export HOME=/var/lib/dronology
-sudo -u dronology -g dronology /usr/bin/mvn install
+sudo -u dronology -g dronology -- /usr/bin/mvn install -Dmaven.test.skip=true
 systemctl daemon-reload
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postinst"
