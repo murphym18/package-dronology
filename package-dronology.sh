@@ -66,7 +66,16 @@ setup_dronology_user() {
 	fi
 }
 
+setup_dronology_script() {
+  chmod 555 "\$1"
+  chown root:root "\$1"
+  chmod u+s "\$1"
+}
+
 setup_dronology_user
+
+setup_dronology_script "/usr/local/bin/dronology-start"
+setup_dronology_script "/usr/local/bin/dronology-stop"
 
 chown -R dronology:dronology /usr/local/Dronology
 chown -R dronology:dronology /var/lib/dronology
@@ -75,6 +84,7 @@ cd /usr/local/Dronology
 export HOME=/var/lib/dronology
 sudo -u dronology -g dronology -- /usr/bin/mvn install -Dmaven.test.skip=true
 systemctl daemon-reload
+
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postinst"
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# script to stop the dronology java backend.
+
+systemctl stop \
+  dronology-omnibus.service \
+  dronology.service \
+  dronology-vaadin.service

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# starts the dronology java backend.
+
+
+systemctl start \
+  dronology-omnibus.service \
+  dronology.service \
+  dronology-vaadin.service
