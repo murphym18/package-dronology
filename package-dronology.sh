@@ -69,7 +69,6 @@ setup_dronology_user() {
 setup_dronology_script() {
   chmod 555 "\$1"
   chown root:root "\$1"
-  chmod u+s "\$1"
 }
 
 setup_dronology_user
