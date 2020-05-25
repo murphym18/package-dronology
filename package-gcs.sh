@@ -45,6 +45,7 @@ setup_dronology_script() {
 
 setup_dronology_script "/usr/local/bin/gcs-start"
 setup_dronology_script "/usr/local/bin/gcs-stop"
+setup_dronology_script "/usr/local/bin/gcs-logs"
 
 chown -R dronology:dronology /usr/local/Dronology-GCS
 
@@ -53,8 +54,8 @@ export HOME=/var/lib/dronology
 cd /usr/local/Dronology-GCS
 sudo -u dronology -g dronology -- /usr/bin/env python3.8 -m venv .venv
 source .venv/bin/activate
-sudo -u dronology -g dronology -- pip install --upgrade pip
-sudo -u dronology -g dronology -- pip install -r requirements.txt
+sudo -u dronology -g dronology -- /usr/local/Dronology-GCS/.venv/bin/pip install --upgrade pip
+sudo -u dronology -g dronology -- /usr/local/Dronology-GCS/.venv/bin/pip install -r requirements.txt
 
 systemctl daemon-reload
 
