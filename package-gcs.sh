@@ -18,7 +18,7 @@ PACKAGE_NAME="gcs-$VER-all"
 OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 mkdir -p "$OUT_DIR/DEBIAN"
 mkdir -p "$OUT_DIR/usr/local/Dronology-GCS"
-ls "$DRONOLOGY_DIR" | xargs tar -C "$GCS_DIR" -cf - | tar -C "$OUT_DIR/usr/local/Dronology-GCS" -xf -
+ls "$GCS_DIR" | xargs tar -C "$GCS_DIR" -cf - | tar -C "$OUT_DIR/usr/local/Dronology-GCS" -xf -
 ls "$SCRIPT_DIR/gcs-prototype" | xargs tar -C "$SCRIPT_DIR/gcs-prototype" -cf - | tar -C "$OUT_DIR" -xf -
 
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
@@ -51,10 +51,10 @@ chown -R dronology:dronology /usr/local/Dronology-GCS
 export HOME=/var/lib/dronology
 
 cd /usr/local/Dronology-GCS
-/usr/bin/env python3.8 -m venv .venv
+sudo -u dronology -g dronology -- /usr/bin/env python3.8 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+sudo -u dronology -g dronology -- pip install --upgrade pip
+sudo -u dronology -g dronology -- pip install -r requirements.txt
 
 systemctl daemon-reload
 
