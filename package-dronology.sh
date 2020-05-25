@@ -38,8 +38,6 @@ cat <<EOF > "$OUT_DIR/DEBIAN/preinst"
 #!/bin/bash
 # preinst script for dronology
 
-apt install --yes adduser openjdk-8-jdk maven mosquitto
-
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/preinst"
 
