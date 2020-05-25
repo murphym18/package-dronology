@@ -95,16 +95,16 @@ cat <<EOF >"$OUT_DIR/DEBIAN/postrm"
 #!/bin/bash
 # postrm script for dronology
 
-remove_dronology_user() {
-  if getent passwd dronology >/dev/null; then
-    deluser --system dronology
-  fi
-  if getent group dronology >/dev/null; then
-    deluser --system --group dronology
-  fi
-}
-
-remove_dronology_user
+# remove_dronology_user() {
+#   if getent passwd dronology >/dev/null; then
+#     deluser --system dronology
+#   fi
+#   if getent group dronology >/dev/null; then
+#     deluser --system --group dronology
+#   fi
+# }
+#
+# remove_dronology_user
 systemctl daemon-reload
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postrm"
