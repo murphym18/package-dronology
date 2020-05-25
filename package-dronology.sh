@@ -75,6 +75,7 @@ setup_dronology_user
 
 setup_dronology_script "/usr/local/bin/dronology-start"
 setup_dronology_script "/usr/local/bin/dronology-stop"
+setup_dronology_script "/usr/local/bin/dronology-logs"
 
 chown -R dronology:dronology /usr/local/Dronology
 chown -R dronology:dronology /var/lib/dronology
