@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# streams the logs for the dronology java backend.
+
+journalctl -u dronology -f
