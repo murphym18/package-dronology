@@ -57,7 +57,7 @@ cp "$VAADIN_WAR_FILE" "$OUT_DIR/usr/local/Dronology/webapps/ROOT.war"
 # Create the package meta files
 mkdir -p "$OUT_DIR/DEBIAN"
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
-Package: Dronology
+Package: dronology
 Version: $VER
 Architecture: all
 Essential: no
