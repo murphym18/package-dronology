@@ -11,9 +11,9 @@ Type=notify
 NotifyAccess=all
 User=dronology
 Group=dronology
-WorkingDirectory=/usr/local/Dronology/edu.nd.dronology.services.launch
+WorkingDirectory=/var/lib/dronology
 EnvironmentFile=/usr/local/Dronology/dronology.env
-ExecStart=/usr/bin/mvn exec:java
+ExecStart=/usr/bin/java -cp "/usr/local/Dronology/lib/*" edu.nd.dronology.services.launch.DronologyServiceRunner
 
 [Install]
 Also=dronology-omnibus.service

@@ -3,24 +3,59 @@
 # Program Args:
 #   1) path to Dronology (working git repo)
 
+# Check command line arguments
 if [ "$#" -lt 1 ]
 then
   echo "ERROR: you must provide the path to dronology as an argument"
   exit 1
 fi
+
+### Create some variables
+
+# SCRIPT_DIR = The directory this file is in
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# DRONOLOGY_DIR = the directory of the Dronology project
 DRONOLOGY_DIR=$1
+
+# WORK_DIR = the directory save the output to (the caller's working directory)
 WORK_DIR=$PWD
+
+# VER = the shortened commit hash of HEAD
 VER=$(cd $DRONOLOGY_DIR; git rev-parse --short HEAD)
+
+
+# compile the java and package it up
+cd $DRONOLOGY_DIR
+mvn clean
+mvn package -Dmaven.test.skip=true
 cd $WORK_DIR
 
+### MAKE THE DEB SOURCE DIRECTORY
+# This is the directory where we gather all the files that go in the deb package
 PACKAGE_NAME="dronology-$VER-all"
 OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
-mkdir -p "$OUT_DIR/DEBIAN"
-mkdir -p "$OUT_DIR/usr/local/Dronology"
-ls "$DRONOLOGY_DIR" | xargs tar -C "$DRONOLOGY_DIR" -cf - | tar -C "$OUT_DIR/usr/local/Dronology" -xf -
-ls "$SCRIPT_DIR/dronology-prototype" | xargs tar -C "$SCRIPT_DIR/dronology-prototype" -cf - | tar -C "$OUT_DIR" -xf -
 
+DRONOLOGY_LIB_DIR="$DRONOLOGY_DIR/edu.nd.dronology.services.launch/target/edu.nd.dronology.services.launch-0.0.1-SNAPSHOT-bin/edu.nd.dronology.services.launch-0.0.1-SNAPSHOT/lib"
+VAADIN_LIB_DIR="$DRONOLOGY_DIR/edu.nd.dronology.ui.vaadin/target/vaadinui-1.0-SNAPSHOT-bin/vaadinui-1.0-SNAPSHOT/lib"
+VAADIN_WAR_FILE="$DRONOLOGY_DIR/edu.nd.dronology.ui.vaadin/target/vaadinui-1.0-SNAPSHOT.war"
+
+# tar_pipe is like copy but directories are merged together
+function tar_pipe() {
+  SRC="$1"
+  DEST="$2"
+  mkdir -p "$DEST"
+  ls "$SRC" | xargs tar -C "$SRC" -cf - | tar -C "$DEST" -xf -
+}
+
+# Copy the program files to the package
+tar_pipe "$VAADIN_LIB_DIR" "$OUT_DIR/usr/local/Dronology/lib"
+tar_pipe "$DRONOLOGY_LIB_DIR" "$OUT_DIR/usr/local/Dronology/lib"
+tar_pipe "$SCRIPT_DIR/dronology-prototype" "$OUT_DIR"
+cp "$VAADIN_WAR_FILE" "$OUT_DIR/usr/local/Dronology/webapps/ROOT.war"
+
+# Create the package meta files
+mkdir -p "$OUT_DIR/DEBIAN"
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
 Package: Dronology
 Version: $VER
@@ -32,8 +67,7 @@ Maintainer: Michael Murphy
 Description: Dronology java backend
 EOF
 
-# preinst
-################################################################################
+### preinst
 cat <<EOF > "$OUT_DIR/DEBIAN/preinst"
 #!/bin/bash
 # preinst script for dronology
@@ -41,8 +75,7 @@ cat <<EOF > "$OUT_DIR/DEBIAN/preinst"
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/preinst"
 
-# postinst
-################################################################################
+### postinst
 cat <<EOF > "$OUT_DIR/DEBIAN/postinst"
 #!/bin/bash
 # postinst script for dronology
@@ -80,16 +113,12 @@ setup_dronology_script "/usr/local/bin/dronology-logs"
 chown -R dronology:dronology /usr/local/Dronology
 chown -R dronology:dronology /var/lib/dronology
 
-cd /usr/local/Dronology
-export HOME=/var/lib/dronology
-sudo -u dronology -g dronology -- /usr/bin/mvn install -Dmaven.test.skip=true
 systemctl daemon-reload
 
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postinst"
 
-# prerm
-################################################################################
+### prerm
 cat <<EOF >>"$OUT_DIR/DEBIAN/prerm"
 #!/bin/bash
 # prerm script for dronology
@@ -99,8 +128,7 @@ systemctl stop dronology-omnibus.service dronology.service dronology-vaadin.serv
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/prerm"
 
-# postrm
-################################################################################
+### postrm
 cat <<EOF >"$OUT_DIR/DEBIAN/postrm"
 #!/bin/bash
 # postrm script for dronology
