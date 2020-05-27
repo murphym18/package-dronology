@@ -27,7 +27,7 @@ Version: $VER
 Architecture: all
 Essential: no
 Priority: optional
-Depends: dronology
+Depends: dronology, python3.8, python3.8-venv, python3.8-doc, binutils
 Maintainer: Michael Murphy
 Description: Dronology ground control station
 EOF
