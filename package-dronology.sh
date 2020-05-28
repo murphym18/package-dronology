@@ -54,6 +54,12 @@ tar_pipe "$DRONOLOGY_LIB_DIR" "$OUT_DIR/usr/local/Dronology/lib"
 tar_pipe "$SCRIPT_DIR/dronology-prototype" "$OUT_DIR"
 cp "$VAADIN_WAR_FILE" "$OUT_DIR/usr/local/Dronology/webapps/ROOT.war"
 
+# Get jetty
+bash "$SCRIPT_DIR/download_jetty.sh"
+JETTY_VERSION=$(cut -d" " -f1 "$SCRIPT_DIR/.cache/jetty_latest.txt")
+tar -C "$OUT_DIR/usr/local/Dronology/" -xf "$SCRIPT_DIR/.cache/$JETTY_VERSION.tar"
+find "$OUT_DIR/usr/local/Dronology/" -maxdepth 1 -type d -regex '^.*jetty.*' -exec mv {} "$OUT_DIR/usr/local/Dronology/jetty" \;
+
 # Create the package meta files
 mkdir -p "$OUT_DIR/DEBIAN"
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
