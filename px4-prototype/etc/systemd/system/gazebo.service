@@ -1,0 +1,12 @@
+[Unit]
+Description=Gazebo Simulation
+PartOf=dronology-omnibus.service
+After=dronology-omnibus.service
+
+[Service]
+Type=simple
+User=dronology
+Group=dronology
+WorkingDirectory=/opt/Firmware
+EnvironmentFile=/var/lib/dronology/gazebo-service.env
+ExecStart=/usr/bin/make px4_sitl gazebo
