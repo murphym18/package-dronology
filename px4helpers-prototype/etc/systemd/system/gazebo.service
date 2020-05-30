@@ -1,7 +1,5 @@
 [Unit]
 Description=Gazebo Simulation with one drone
-PartOf=dronology-omnibus.service
-After=dronology-omnibus.service
 Conflicts=gazebo-multi.service
 Conflicts=jmavsim.service
 
