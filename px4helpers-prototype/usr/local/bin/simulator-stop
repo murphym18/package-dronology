@@ -2,4 +2,4 @@
 #
 # stops the multi-drone gazebo simulator.
 
-systemctl stop gazebo-multi.service
+systemctl stop simulator.service

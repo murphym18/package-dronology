@@ -2,4 +2,4 @@
 
 # streams the logs for the multi-drone gazebo simulator.
 
-journalctl -u gazebo-multi.service -f
+journalctl -u simulator.service -f
