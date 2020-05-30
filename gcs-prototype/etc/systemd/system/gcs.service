@@ -11,4 +11,5 @@ User=dronology
 Group=dronology
 WorkingDirectory=/usr/local/Dronology-GCS
 EnvironmentFile=/usr/local/Dronology-GCS/dronology-gcs.env
-ExecStart=/usr/local/Dronology-GCS/.venv/bin/python dronology/main.py
+EnvironmentFile=/var/lib/dronology/simulator.env
+ExecStart=/usr/local/Dronology-GCS/.venv/bin/python dronology/main.py $NUMBER_OF_DRONES
