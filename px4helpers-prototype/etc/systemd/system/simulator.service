@@ -9,4 +9,4 @@ User=dronology
 Group=dronology
 WorkingDirectory=/opt/Firmware
 EnvironmentFile=/var/lib/dronology/jmavsim-service.env
-ExecStart=/usr/local/bin/multi-drone-runner.py $NUMBER_OF_DRONES
+ExecStart=/usr/bin/python3.8 /usr/local/bin/multi-drone-runner.py $NUMBER_OF_DRONES
