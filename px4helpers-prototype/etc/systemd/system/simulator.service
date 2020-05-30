@@ -1,0 +1,12 @@
+[Unit]
+Description=JMAVsim Simulation with one drone
+Conflicts=gazebo.service
+Conflicts=gazebo-multi.service
+
+[Service]
+Type=simple
+User=dronology
+Group=dronology
+WorkingDirectory=/opt/Firmware
+EnvironmentFile=/var/lib/dronology/jmavsim-service.env
+ExecStart=/usr/local/bin/multi-drone-runner.py $NUMBER_OF_DRONES
