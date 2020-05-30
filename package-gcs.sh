@@ -23,7 +23,7 @@ ls "$SCRIPT_DIR/gcs-prototype" | xargs tar -C "$SCRIPT_DIR/gcs-prototype" -cf - 
 
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
 Package: Dronology-GCS
-Version: $VER
+Version: 0.$VER
 Architecture: all
 Essential: no
 Priority: optional

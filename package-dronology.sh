@@ -64,7 +64,7 @@ find "$OUT_DIR/usr/local/Dronology/" -maxdepth 1 -type d -regex '^.*jetty.*' -ex
 mkdir -p "$OUT_DIR/DEBIAN"
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
 Package: dronology
-Version: $VER
+Version: 0.$VER
 Architecture: all
 Essential: no
 Priority: optional
