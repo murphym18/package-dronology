@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# starts the jmavsim service with one drone.
+
+systemctl start jmavsim.service

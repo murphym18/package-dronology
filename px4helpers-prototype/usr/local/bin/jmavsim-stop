@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# stops the jmavsim service with one drone.
+
+systemctl stop jmavsim.service

@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# stops the gazebo simulator with one drone.
+
+systemctl stop gazebo.service
