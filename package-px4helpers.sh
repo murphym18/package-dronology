@@ -60,25 +60,16 @@ function setup_helper_script() {
   chown root:root "\$1"
 }
 
-setup_helper_script "/usr/local/bin/gazebo-logs"
-setup_helper_script "/usr/local/bin/gazebo-start"
-setup_helper_script "/usr/local/bin/gazebo-stop"
-
-setup_helper_script "/usr/local/bin/jmavsim-logs"
-setup_helper_script "/usr/local/bin/jmavsim-start"
-setup_helper_script "/usr/local/bin/jmavsim-stop"
-
 setup_helper_script "/usr/local/bin/simulator-logs"
 setup_helper_script "/usr/local/bin/simulator-start"
 setup_helper_script "/usr/local/bin/simulator-stop"
 
 function setup_env_file() {
-  chmod 774 "\$1"
+  chmod 664 "\$1"
   chown dronology:dronology "\$1"
 }
 
-setup_env_file "/var/lib/dronology/gazebo-service.env"
-setup_env_file "/var/lib/dronology/jmavsim-service.env"
+setup_env_file "/var/lib/dronology/simulator.env"
 
 systemctl daemon-reload
 
@@ -90,7 +81,7 @@ cat <<EOF >>"$OUT_DIR/DEBIAN/prerm"
 #!/bin/bash
 # prerm script for px4helpers
 
-systemctl stop gazebo-multi.service gazebo.service jmavsim.service
+systemctl stop simulator.service
 
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/prerm"
