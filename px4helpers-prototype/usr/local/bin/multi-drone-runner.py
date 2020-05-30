@@ -28,7 +28,7 @@ for port in range(start_port, start_port + num_drones):
         '-p', str(port),
         '-l'
     ]
-    drone = subprocess.Popen(world_simulator_cmd)
+    drone = subprocess.Popen(drone_simulator_cmd)
     drone_processes.append(drone)
 
 for process in drone_processes:
