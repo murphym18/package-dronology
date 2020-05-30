@@ -9,9 +9,6 @@ Px4_home = Path('/opt/Firmware')
 jmavsim_backend = px4_home / 'Tools' / 'sitl_multiple_run.sh'
 jmavsim_drone = px4_home / 'Tools' / 'jmavsim_run.sh'
 
--p 4562 -l
-./Tools/jmavsim_run.sh -p 4561
-
 world_simulator_cmd = [
     os.fspath(bash),
     os.fspath(jmavsim_backend),
