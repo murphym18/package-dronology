@@ -1,5 +1,0 @@
-#!/bin/bash
-#
-# streams the logs for the jmavsim simulator with one drone.
-
-journalctl -u jmavsim.service -f
