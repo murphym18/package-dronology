@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# streams the logs for the gazebo simulator with one drone.
-
-journalctl -u gazebo.service -f 

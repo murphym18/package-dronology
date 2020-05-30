@@ -1,5 +1,0 @@
-#!/bin/bash
-#
-# starts the gazebo simulator with one drone.
-
-systemctl start gazebo.service
