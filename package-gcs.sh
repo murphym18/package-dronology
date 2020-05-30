@@ -14,7 +14,7 @@ WORK_DIR=$PWD
 VER=$(cd $GCS_DIR; git rev-parse --short HEAD)
 cd $WORK_DIR
 
-PACKAGE_NAME="gcs-$VER-all"
+PACKAGE_NAME="gcs-0.$VER-all"
 OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 mkdir -p "$OUT_DIR/DEBIAN"
 mkdir -p "$OUT_DIR/usr/local/Dronology-GCS"

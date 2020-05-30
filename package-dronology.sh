@@ -33,7 +33,7 @@ cd $WORK_DIR
 
 ### MAKE THE DEB SOURCE DIRECTORY
 # This is the directory where we gather all the files that go in the deb package
-PACKAGE_NAME="dronology-$VER-all"
+PACKAGE_NAME="dronology-0.$VER-all"
 OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 
 DRONOLOGY_LIB_DIR="$DRONOLOGY_DIR/edu.nd.dronology.services.launch/target/edu.nd.dronology.services.launch-0.0.1-SNAPSHOT-bin/edu.nd.dronology.services.launch-0.0.1-SNAPSHOT/lib"
