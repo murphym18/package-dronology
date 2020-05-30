@@ -5,7 +5,7 @@ import sys
 
 num_drones = int(sys.argv[1])
 bash = Path('/bin/bash')
-Px4_home = Path('/opt/Firmware')
+px4_home = Path('/opt/Firmware')
 jmavsim_backend = px4_home / 'Tools' / 'sitl_multiple_run.sh'
 jmavsim_drone = px4_home / 'Tools' / 'jmavsim_run.sh'
 
