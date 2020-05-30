@@ -1,6 +1,5 @@
 [Unit]
 Description=JMAVsim Simulation with one drone
-PartOf=dronology-omnibus.service
 Conflicts=gazebo.service
 Conflicts=gazebo-multi.service
 
@@ -10,4 +9,4 @@ User=dronology
 Group=dronology
 WorkingDirectory=/opt/Firmware
 EnvironmentFile=/var/lib/dronology/jmavsim-service.env
-ExecStart=/usr/bin/make px4_sitl jmavsim
+ExecStart=/usr/bin/make px4_sitl_default jmavsim
