@@ -14,7 +14,7 @@ WORK_DIR=$PWD
 VER=$(cd $GCS_DIR; git rev-parse --short HEAD)
 cd $WORK_DIR
 
-PACKAGE_NAME="gcs-0.$VER-all"
+PACKAGE_NAME="dronology-gcs-0.$VER-all"
 OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 mkdir -p "$OUT_DIR/DEBIAN"
 mkdir -p "$OUT_DIR/usr/local/Dronology-GCS"
@@ -22,7 +22,7 @@ ls "$GCS_DIR" | xargs tar -C "$GCS_DIR" -cf - | tar -C "$OUT_DIR/usr/local/Drono
 ls "$SCRIPT_DIR/gcs-prototype" | xargs tar -C "$SCRIPT_DIR/gcs-prototype" -cf - | tar -C "$OUT_DIR" -xf -
 
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
-Package: Dronology-GCS
+Package: dronology-gcs
 Version: 0.$VER
 Architecture: all
 Essential: no
