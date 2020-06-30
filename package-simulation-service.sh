@@ -25,8 +25,9 @@ Version: 0.$VER
 Architecture: all
 Essential: no
 Priority: optional
+Depends: dronology, dronology-gcs
 Maintainer: Michael Murphy
-Description: Scripts and service units for PX4 simulator
+Description: Scripts and service units for running simulations
 EOF
 
 ### postinst
