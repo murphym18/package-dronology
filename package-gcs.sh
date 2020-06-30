@@ -43,10 +43,6 @@ setup_dronology_script() {
   chown root:root "\$1"
 }
 
-setup_dronology_script "/usr/local/bin/gcs-start"
-setup_dronology_script "/usr/local/bin/gcs-stop"
-setup_dronology_script "/usr/local/bin/gcs-logs"
-
 chown -R dronology:dronology /usr/local/Dronology-GCS
 
 export HOME=/var/lib/dronology

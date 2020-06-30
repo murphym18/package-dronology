@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Starts the Dronology Ground Control Station.
-
-systemctl start gcs.service
