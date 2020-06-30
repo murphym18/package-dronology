@@ -19,7 +19,7 @@ OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 mkdir -p "$OUT_DIR/DEBIAN"
 mkdir -p "$OUT_DIR/usr/local/Dronology-GCS"
 ls "$GCS_DIR" | xargs tar -C "$GCS_DIR" -cf - | tar -C "$OUT_DIR/usr/local/Dronology-GCS" -xf -
-ls "$SCRIPT_DIR/gcs-prototype" | xargs tar -C "$SCRIPT_DIR/gcs-prototype" -cf - | tar -C "$OUT_DIR" -xf -
+ls "$SCRIPT_DIR/dronology-gcs-prototype" | xargs tar -C "$SCRIPT_DIR/dronology-gcs-prototype" -cf - | tar -C "$OUT_DIR" -xf -
 
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
 Package: dronology-gcs
@@ -53,8 +53,6 @@ source .venv/bin/activate
 sudo -u dronology -g dronology -- /usr/local/Dronology-GCS/.venv/bin/pip install --upgrade pip
 sudo -u dronology -g dronology -- /usr/local/Dronology-GCS/.venv/bin/pip install -r requirements.txt
 
-systemctl daemon-reload
-
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postinst"
 
@@ -63,8 +61,6 @@ chmod 755 "$OUT_DIR/DEBIAN/postinst"
 cat <<EOF >>"$OUT_DIR/DEBIAN/prerm"
 #!/bin/bash
 # prerm script for dronology
-
-systemctl stop gcs.service
 
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/prerm"
@@ -75,7 +71,6 @@ cat <<EOF >"$OUT_DIR/DEBIAN/postrm"
 #!/bin/bash
 # postrm script for dronology
 
-systemctl daemon-reload
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/postrm"
 
