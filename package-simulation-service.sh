@@ -1,10 +1,10 @@
 #!/bin/bash
-# makes the px4helpers deb package
+# makes the simulation-service deb package
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 WORK_DIR=$PWD
 VER=$(cd $SCRIPT_DIR; git rev-parse --short HEAD)
-PACKAGE_NAME="px4helpers-0.$VER-all"
+PACKAGE_NAME="simulation-service-0.$VER-all"
 OUT_DIR="$WORK_DIR/$PACKAGE_NAME"
 cd $WORK_DIR
 
@@ -16,23 +16,23 @@ function tar_pipe() {
   mkdir -p "$DEST"
   ls "$SRC" | xargs tar -C "$SRC" -cf - | tar -C "$DEST" -xf -
 }
-tar_pipe "$SCRIPT_DIR/px4helpers-prototype" "$OUT_DIR"
+tar_pipe "$SCRIPT_DIR/simulation-service-prototype" "$OUT_DIR"
 
 
 cat <<EOF > "$OUT_DIR/DEBIAN/control"
-Package: px4helpers
+Package: simulation-service
 Version: 0.$VER
 Architecture: all
 Essential: no
 Priority: optional
 Maintainer: Michael Murphy
-Description: Scripts and service units for PX4 simulators
+Description: Scripts and service units for PX4 simulator
 EOF
 
 ### postinst
 cat <<EOF > "$OUT_DIR/DEBIAN/postinst"
 #!/bin/bash
-# postinst script for px4helpers
+# postinst script for simulation-service
 
 setup_dronology_user() {
 	if ! getent group dronology >/dev/null; then
@@ -79,7 +79,7 @@ chmod 755 "$OUT_DIR/DEBIAN/postinst"
 ### prerm
 cat <<EOF >>"$OUT_DIR/DEBIAN/prerm"
 #!/bin/bash
-# prerm script for px4helpers
+# prerm script for simulation-service
 
 systemctl stop simulator.service
 
@@ -89,7 +89,7 @@ chmod 755 "$OUT_DIR/DEBIAN/prerm"
 ### postrm
 cat <<EOF >"$OUT_DIR/DEBIAN/postrm"
 #!/bin/bash
-# postrm script for px4helpers
+# postrm script for simulation-service
 
 systemctl daemon-reload
 EOF
