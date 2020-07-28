@@ -1,0 +1,29 @@
+#!/bin/bash
+
+LOG_FILE=/var/lib/dronology/simulator-cleanup.log
+
+function log() {
+    echo "$1" | sudo -u dronology -g dronology tee -a $LOG_FILE
+}
+
+log "starting simulator-cleanup $(date)"
+
+sudo /usr/local/bin/dronology-stop
+sudo /usr/local/bin/simulator-stop
+
+cat <<EOS | sudo -u dronology -g dronology /bin/bash
+
+export HOME=/var/lib/dronology
+cd /opt/Firmware
+make clean
+make px4_sitl_default
+
+cd /var/lib/dronology/logs
+rm *.log
+EOS
+
+sudo /usr/local/bin/dronology-start
+sudo /usr/local/bin/simulator-start
+
+log "simulator-cleanup done $(date)"
+log " "

@@ -9,4 +9,4 @@ User=dronology
 Group=dronology
 WorkingDirectory=/usr/local/Dronology-GCS
 EnvironmentFile=/var/lib/dronology/simulator.env
-ExecStart=/usr/local/Dronology-GCS/.venv/bin/python /usr/local/Dronology-GCS/dronology/launcher/simulators.py --px4_home=/opt/Firmware --python_binary=/usr/local/Dronology-GCS/.venv/bin/python --dronology_gcs_home=/usr/local/Dronology-GCS $NUMBER_OF_DRONES
+ExecStart=/usr/local/Dronology-GCS/.venv/bin/python dronology/launcher/simulators.py --px4_home=/opt/Firmware --python_binary=/usr/local/Dronology-GCS/.venv/bin/python --dronology_gcs_home=/usr/local/Dronology-GCS $NUMBER_OF_DRONES

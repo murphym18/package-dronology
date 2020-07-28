@@ -1,0 +1,9 @@
+[Unit]
+Description=Clean up logs for PX4 and dronology
+
+[Timer]
+Unit=simulator-cleanup.service
+OnCalendar=Mon,Wed,Fri,Sat *-*-* 03:50:00
+
+[Install]
+WantedBy=timers.target

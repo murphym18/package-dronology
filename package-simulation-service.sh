@@ -61,6 +61,7 @@ function setup_helper_script() {
   chown root:root "\$1"
 }
 
+setup_helper_script "/usr/local/bin/simulator-cleanup"
 setup_helper_script "/usr/local/bin/simulator-logs"
 setup_helper_script "/usr/local/bin/simulator-start"
 setup_helper_script "/usr/local/bin/simulator-stop"
@@ -71,6 +72,15 @@ function setup_env_file() {
 }
 
 setup_env_file "/var/lib/dronology/simulator.env"
+
+function setup_systemd_unit() {
+  chmod 664 "\$1"
+  chown root:root "\$1"
+}
+
+setup_systemd_unit "/etc/systemd/system/simulator.service"
+setup_systemd_unit "/etc/systemd/system/simulator-cleanup.service"
+setup_systemd_unit "/etc/systemd/system/simulator-cleanup.timer"
 
 systemctl daemon-reload
 
@@ -83,6 +93,8 @@ cat <<EOF >>"$OUT_DIR/DEBIAN/prerm"
 # prerm script for simulation-service
 
 systemctl stop simulator.service
+systemctl disable simulator-cleanup.timer
+systemctl stop simulator-cleanup.timer
 
 EOF
 chmod 755 "$OUT_DIR/DEBIAN/prerm"

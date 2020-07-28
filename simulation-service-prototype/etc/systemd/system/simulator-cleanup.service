@@ -1,0 +1,6 @@
+[Unit]
+Description=Clean up PX4 and dronology logs
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/simulator-cleanup
