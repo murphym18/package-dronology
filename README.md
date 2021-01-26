@@ -6,7 +6,7 @@ To use this tool you must install the dependencies:
 sudo apt install --yes jq openjdk-8-jdk maven
 ```
 
-Clone the package where you'd like, for example:
+Clone this repo, for example:
 
 ```bash
 cd ~/Desktop
