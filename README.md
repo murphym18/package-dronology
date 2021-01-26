@@ -33,7 +33,7 @@ git checkout py3
 ```
 
 ## Build Dronology
-`cd` to where you want the generated deb files to go. Run the package script for dronology, called `package-dronology.sh`, giving it the path to the `Dronology`. For example:
+`cd` to where you want the generated deb files to go. Run the package script for dronology, called `package-dronology.sh`, giving it the path to `Dronology`. For example:
 
 ```bash
 mkdir -p ~/Desktop/package-dronology/out
