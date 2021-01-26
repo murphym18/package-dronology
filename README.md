@@ -51,7 +51,7 @@ bash ../package-dronology-gcs.sh ~/Desktop/clean-repos/Dronology-GCS
 ```
 
 ## Build the simulation service
-The simulation service includes scripts to start and stop simulations as well as run related systemd service units help you run simulations all the time on a server.
+The simulation service includes scripts to start and stop simulations. It also includes systemd units that help you run simulations on a server.
 
 `cd` to where you'd like to deb file to be saved. Run the script that makes the `deb` package, called `package-simulation-service.sh`.
 
